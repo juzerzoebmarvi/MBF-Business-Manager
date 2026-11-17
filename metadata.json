@@ -1,0 +1,8 @@
+{
+  "name": "Business Manager",
+  "description": "Comprehensive business management system for sales, purchases, inventory, payments, contacts, and reports with offline-first storage and PDF/Excel export.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "entities": {
+    "StoreDoc": {
+      "title": "Store Document",
+      "description": "Shared business store collection containing partitioned business entities",
+      "type": "object",
+      "properties": {
+        "c": {
+          "type": "string",
+          "description": "Category or partition key (e.g. cust, sup, items, sales, purch, meta)"
+        },
+        "list": {
+          "type": "array",
+          "description": "List of business records in this shard"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of last update"
+        },
+        "updatedBy": {
+          "type": "string",
+          "description": "User UID who made the update"
+        }
+      },
+      "required": ["c"]
+    }
+  },
+  "firestore": {
+    "/store/{docId}": {
+      "schema": {
+        "$ref": "#/entities/StoreDoc"
+      },
+      "description": "Shared business database documents synchronized across authenticated team members"
+    }
+  }
+}

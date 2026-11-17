@@ -1,0 +1,10 @@
+{
+  "name": "business-manager-web",
+  "version": "1.0.0",
+  "description": "Business Manager Web application for laptop, desktop, and tablet browsers with real-time Firestore sync",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  }
+}

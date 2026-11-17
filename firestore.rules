@@ -1,0 +1,21 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isValidStoreDoc(data) {
+      return data.c is string && data.c.size() > 0 && data.c.size() <= 60 &&
+        (!('list' in data) || data.list is list) &&
+        (!('updatedBy' in data) || (data.updatedBy is string && data.updatedBy == request.auth.uid)) &&
+        (!('updatedAt' in data) || (data.updatedAt is timestamp && data.updatedAt <= request.time));
+    }
+
+    match /store/{docId} {
+      allow read: if isAuthenticated();
+      allow create, update: if isAuthenticated() && isValidStoreDoc(request.resource.data);
+      allow delete: if isAuthenticated();
+    }
+  }
+}
